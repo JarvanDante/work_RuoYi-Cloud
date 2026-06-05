@@ -12,6 +12,9 @@ spring:
     active: dev
   cloud:
     nacos:
+      # Nacos 2.4.3要配置用户名和密码
+      username: nacos
+      password: nacos123456
       discovery:
         # 服务注册地址
         server-addr: 127.0.0.1:8848
