@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -eu
+
 # 复制项目的文件到对应docker路径，便于一键生成镜像。
 usage() {
 	echo "Usage: sh copy.sh"
@@ -9,7 +11,7 @@ usage() {
 
 # copy sql
 echo "begin copy sql "
-cp ../sql/ry_20260402.sql ./mysql/db
+cp ../sql/ry_20260417.sql ./mysql/db
 cp ../sql/ry_config_20260311.sql ./mysql/db
 
 # copy html
@@ -38,4 +40,3 @@ cp ../ruoyi-modules/ruoyi-job/target/ruoyi-modules-job.jar ./ruoyi/modules/job/j
 
 echo "begin copy ruoyi-modules-gen "
 cp ../ruoyi-modules/ruoyi-gen/target/ruoyi-modules-gen.jar ./ruoyi/modules/gen/jar
-
