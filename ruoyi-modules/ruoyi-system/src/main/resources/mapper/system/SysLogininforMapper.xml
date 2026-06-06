@@ -11,15 +11,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="ipaddr"        column="ipaddr"            />
 		<result property="msg"           column="msg"               />
 		<result property="accessTime"    column="access_time"       />
+		<result property="location"    column="location"       />
 	</resultMap>
 
 	<insert id="insertLogininfor" parameterType="SysLogininfor">
-		insert into sys_logininfor (user_name, status, ipaddr, msg, access_time)
-		values (#{userName}, #{status}, #{ipaddr}, #{msg}, sysdate())
+		insert into sys_logininfor (user_name, status, ipaddr, msg, access_time, location)
+		values (#{userName}, #{status}, #{ipaddr}, #{msg}, sysdate(), #{location})
 	</insert>
 	
 	<select id="selectLogininforList" parameterType="SysLogininfor" resultMap="SysLogininforResult">
-		select info_id, user_name, ipaddr, status, msg, access_time from sys_logininfor
+		select info_id, user_name, ipaddr, status, msg, access_time, location from sys_logininfor
 		<where>
 			<if test="ipaddr != null and ipaddr != ''">
 				AND ipaddr like concat('%', #{ipaddr}, '%')

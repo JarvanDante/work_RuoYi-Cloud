@@ -571,6 +571,7 @@ create table sys_logininfor (
   key idx_sys_logininfor_lt (access_time)
 ) engine=innodb auto_increment=100 comment = '系统访问记录';
 
+alter table sys_logininfor add column location varchar(255) default '' comment '城市地址' after ipaddr;
 
 -- ----------------------------
 -- 15、定时任务调度表

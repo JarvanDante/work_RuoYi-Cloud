@@ -30,6 +30,17 @@ public class SysLogininfor extends BaseEntity
     /** 地址 */
     @Excel(name = "地址")
     private String ipaddr;
+    /** 城市地址 */
+    @Excel(name = "城市地址")
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     /** 描述 */
     @Excel(name = "描述")

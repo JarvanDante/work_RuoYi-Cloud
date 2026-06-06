@@ -1,5 +1,6 @@
 package com.ruoyi.auth.service;
 
+import com.ruoyi.common.core.utils.address.AddressUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import com.ruoyi.common.core.constant.Constants;
@@ -31,8 +32,10 @@ public class SysRecordLogService
     public void recordLogininfor(String username, String status, String message)
     {
         SysLogininfor logininfor = new SysLogininfor();
+        String ip = IpUtils.getIpAddr();
         logininfor.setUserName(username);
-        logininfor.setIpaddr(IpUtils.getIpAddr());
+        logininfor.setIpaddr(ip);
+        logininfor.setLocation(AddressUtils.getRealAddressByIp(ip));
         logininfor.setMsg(message);
         // 日志状态
         if (StringUtils.equalsAny(status, Constants.LOGIN_SUCCESS, Constants.LOGOUT, Constants.REGISTER))
