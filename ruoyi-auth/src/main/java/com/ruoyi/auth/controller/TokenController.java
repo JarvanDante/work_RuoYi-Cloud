@@ -35,8 +35,8 @@ public class TokenController
     @Autowired
     private SysLoginService sysLoginService;
 
-    @PostMapping(value="login",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public R<?> login(LoginBody form)
+    @PostMapping(value="login")
+    public R<?> login(@RequestBody LoginBody form)
     {
         // 用户登录
         LoginUser userInfo = sysLoginService.login(form.getUsername(), form.getPassword());
