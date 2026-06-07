@@ -34,6 +34,7 @@ public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
     @Autowired
     private CaptchaProperties captchaProperties;
 
+    private static final String USERNAME = "username";
     private static final String CODE = "code";
 
     private static final String UUID = "uuid";
@@ -54,6 +55,11 @@ public class ValidateCodeFilter extends AbstractGatewayFilterFactory<Object>
             {
                 String rspStr = resolveBodyFromRequest(request);
                 JSONObject obj = JSON.parseObject(rspStr);
+                String username = obj.getString(USERNAME);
+                if (validateCodeService.isIgnoredUser(username))
+                {
+                    return chain.filter(exchange);
+                }
                 validateCodeService.checkCaptcha(obj.getString(CODE), obj.getString(UUID));
             }
             catch (Exception e)

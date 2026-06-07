@@ -2,6 +2,7 @@ package com.ruoyi.gateway.service.impl;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import jakarta.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -114,5 +115,15 @@ public class ValidateCodeServiceImpl implements ValidateCodeService
         {
             throw new CaptchaException("验证码错误");
         }
+    }
+
+    /**
+     * 判断用户名是否在验证码白名单中
+     */
+    @Override
+    public boolean isIgnoredUser(String username)
+    {
+        List<String> ignoreUsers = captchaProperties.getIgnoreUsers();
+        return StringUtils.isNotEmpty(username) && ignoreUsers != null && ignoreUsers.contains(username);
     }
 }

@@ -20,4 +20,10 @@ public interface ValidateCodeService
      * 校验验证码
      */
     public void checkCaptcha(String key, String value) throws CaptchaException;
+
+    /**
+     * 判断用户名是否在验证码白名单中
+     */
+    public boolean isIgnoredUser(String username);
+
 }

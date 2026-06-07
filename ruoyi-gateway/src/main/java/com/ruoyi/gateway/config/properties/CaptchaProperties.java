@@ -4,6 +4,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 验证码配置
  * 
@@ -19,6 +22,20 @@ public class CaptchaProperties
      */
     private Boolean enabled;
 
+
+    /**
+     * 登录白名单
+     */
+    private List<String> ignoreUsers = new ArrayList<>();
+
+
+    public List<String> getIgnoreUsers() {
+        return ignoreUsers;
+    }
+
+    public void setIgnoreUsers(List<String> ignoreUsers) {
+        this.ignoreUsers = ignoreUsers;
+    }
     /**
      * 验证码类型（math 数组计算 char 字符）
      */
