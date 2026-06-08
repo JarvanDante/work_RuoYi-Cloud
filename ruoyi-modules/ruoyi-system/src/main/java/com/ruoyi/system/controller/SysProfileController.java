@@ -60,6 +60,19 @@ public class SysProfileController extends BaseController
         return ajax;
     }
 
+    @GetMapping("/simple")
+    public AjaxResult getSimpleUser() {
+        LoginUser loginUser = SecurityUtils.getLoginUser();
+
+        AjaxResult ajax = AjaxResult.success();
+        ajax.put("userId", loginUser.getUserid());
+        ajax.put("userName", loginUser.getUsername());
+        ajax.put("nickName", loginUser.getSysUser().getNickName());
+        ajax.put("deptName", loginUser.getSysUser().getDept().getDeptName());
+
+        return ajax;
+    }
+
     /**
      * 修改用户
      */
