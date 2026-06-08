@@ -62,13 +62,14 @@ public class SysProfileController extends BaseController
 
     @GetMapping("/simple")
     public AjaxResult getSimpleUser() {
-        LoginUser loginUser = SecurityUtils.getLoginUser();
+        String username = SecurityUtils.getUsername();
+        SysUser user = userService.selectUserByUserName(username);
 
         AjaxResult ajax = AjaxResult.success();
-        ajax.put("userId", loginUser.getUserid());
-        ajax.put("userName", loginUser.getUsername());
-        ajax.put("nickName", loginUser.getSysUser().getNickName());
-        ajax.put("deptName", loginUser.getSysUser().getDept().getDeptName());
+        ajax.put("userId", user.getUserId());
+        ajax.put("userName", user.getUserName());
+        ajax.put("nickName", user.getNickName());
+        ajax.put("deptName",user.getDept().getDeptName());
 
         return ajax;
     }
