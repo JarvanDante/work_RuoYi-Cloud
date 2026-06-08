@@ -1,0 +1,25 @@
+package com.ruoyi.system.mapper;
+
+import com.ruoyi.system.domain.SysCustomer;
+import com.ruoyi.system.domain.SysNotice;
+
+import java.util.List;
+
+/**
+ * 客户表 数据层
+ * 
+ * @author ruoyi
+ */
+public interface SysCustomerMapper
+{
+
+    /**
+     * 查询客户列表
+     * 
+     * @param sysCustomer 客户信息
+     * @return 客户集合
+     */
+    public List<SysCustomer> selectCustomerList(SysCustomer sysCustomer);
+
+
+}
