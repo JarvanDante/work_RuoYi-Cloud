@@ -2,6 +2,7 @@ package com.ruoyi.system.service;
 
 import com.ruoyi.system.domain.SysCustomer;
 import com.ruoyi.system.domain.SysNotice;
+import com.ruoyi.system.domain.vo.SysCustomerVO;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public interface ISysCustomerService
      * @param sysCustomer 客户信息
      * @return 客户集合
      */
-    public List<SysCustomer> selectCustomerList(SysCustomer sysCustomer);
+    public List<SysCustomerVO> selectCustomerList(SysCustomer sysCustomer);
 
 
 }

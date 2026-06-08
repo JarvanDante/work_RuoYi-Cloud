@@ -1,5 +1,6 @@
 package com.ruoyi.system.controller;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.core.web.controller.BaseController;
 import com.ruoyi.common.core.web.domain.AjaxResult;
@@ -10,6 +11,7 @@ import com.ruoyi.common.security.annotation.RequiresPermissions;
 import com.ruoyi.common.security.utils.SecurityUtils;
 import com.ruoyi.system.domain.SysCustomer;
 import com.ruoyi.system.domain.SysNotice;
+import com.ruoyi.system.domain.vo.SysCustomerVO;
 import com.ruoyi.system.service.ISysCustomerService;
 import com.ruoyi.system.service.ISysNoticeReadService;
 import com.ruoyi.system.service.ISysNoticeService;
@@ -31,9 +33,6 @@ public class SysCustomerController extends BaseController
     @Autowired
     private ISysCustomerService customerService;
 
-    @Autowired
-    private ISysNoticeReadService noticeReadService;
-
     /**
      * 获取通知公告列表
      */
@@ -42,7 +41,7 @@ public class SysCustomerController extends BaseController
     public TableDataInfo list(SysCustomer sysCustomer)
     {
         startPage();
-        List<SysCustomer> list = customerService.selectCustomerList(sysCustomer);
+        List<SysCustomerVO> list = customerService.selectCustomerList(sysCustomer);
         return getDataTable(list);
     }
 

@@ -1,11 +1,8 @@
 package com.ruoyi.system.domain;
 
-import com.alibaba.druid.sql.visitor.functions.Char;
 import com.ruoyi.common.core.web.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-
-import java.util.Date;
 
 public class SysCustomer extends BaseEntity {
 
@@ -39,11 +36,11 @@ public class SysCustomer extends BaseEntity {
         this.phone = phone;
     }
 
-    public Char getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Char status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -51,7 +48,7 @@ public class SysCustomer extends BaseEntity {
     private String phone;
 
     /* 状态 */
-    private Char status;
+    private String status;
 
     @Override
     public String toString() {

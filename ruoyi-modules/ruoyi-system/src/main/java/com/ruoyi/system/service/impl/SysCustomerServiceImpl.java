@@ -2,6 +2,7 @@ package com.ruoyi.system.service.impl;
 
 import com.ruoyi.system.domain.SysCustomer;
 import com.ruoyi.system.domain.SysNotice;
+import com.ruoyi.system.domain.vo.SysCustomerVO;
 import com.ruoyi.system.mapper.SysCustomerMapper;
 import com.ruoyi.system.mapper.SysNoticeMapper;
 import com.ruoyi.system.service.ISysCustomerService;
@@ -30,8 +31,16 @@ public class SysCustomerServiceImpl implements ISysCustomerService
      * @return 客户集合
      */
     @Override
-    public List<SysCustomer> selectCustomerList(SysCustomer sysCustomer) {
-        return sysCustomerMapper.selectCustomerList(sysCustomer);
+    public List<SysCustomerVO> selectCustomerList(SysCustomer sysCustomer) {
+        List<SysCustomer> list = sysCustomerMapper.selectCustomerList(sysCustomer);
+        return list.stream().map(item->{
+            SysCustomerVO vo =new SysCustomerVO();
+            vo.setId(item.getId());
+            vo.setName(item.getName());
+            vo.setPhone(item.getPhone());
+            vo.setStatus(item.getStatus());
+            return vo;
+        }).toList();
     }
 
 }
