@@ -45,15 +45,27 @@ public class SysCustomerController extends BaseController
         return getDataTable(list);
     }
 
-//    /**
-//     * 根据通知公告编号获取详细信息
-//     */
-//    @GetMapping(value = "/{noticeId}")
-//    public AjaxResult getInfo(@PathVariable Long noticeId)
-//    {
-//        return success(noticeService.selectNoticeById(noticeId));
-//    }
-//
+    /**
+     * 获取客户详细信息
+     * @param customerId
+     * @return
+     */
+    @RequiresPermissions("system:customer:query")
+    @GetMapping("/{customerId}")
+    public AjaxResult getInfo(@PathVariable Integer customerId)
+    {
+        return success(customerService.selectCustomerInfo(customerId));
+    }
+
+
+    @RequiresPermissions("system:customer:add")
+    @Log(title = "客户", businessType = BusinessType.INSERT)
+    @PostMapping
+    public AjaxResult add(@Validated @RequestBody SysCustomer customer)
+    {
+        return toAjax(customerService.insertCustomer(customer));
+    }
+
 //    /**
 //     * 新增通知公告
 //     */

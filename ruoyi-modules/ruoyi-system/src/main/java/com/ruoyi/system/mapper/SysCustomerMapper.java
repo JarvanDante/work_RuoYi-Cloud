@@ -21,5 +21,8 @@ public interface SysCustomerMapper
      */
     public List<SysCustomer> selectCustomerList(SysCustomer sysCustomer);
 
+    public SysCustomer selectCustomerInfo(Integer customerId);
+
+    public int insertCustomer(SysCustomer sysCustomer);
 
 }

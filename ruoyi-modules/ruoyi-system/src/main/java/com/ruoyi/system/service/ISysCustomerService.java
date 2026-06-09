@@ -23,4 +23,9 @@ public interface ISysCustomerService
     public List<SysCustomerVO> selectCustomerList(SysCustomer sysCustomer);
 
 
+    public SysCustomerVO selectCustomerInfo(Integer customerId);
+
+    public int insertCustomer(SysCustomer sysCustomer);
+
+
 }

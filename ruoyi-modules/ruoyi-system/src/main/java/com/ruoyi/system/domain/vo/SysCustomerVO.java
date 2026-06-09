@@ -1,10 +1,21 @@
 package com.ruoyi.system.domain.vo;
 
+import java.util.Date;
+
 public class SysCustomerVO {
     private Integer id;
     private String name;
     private String phone;
     private String status;
+    private Date createTime;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
     public Integer getId() {
         return id;

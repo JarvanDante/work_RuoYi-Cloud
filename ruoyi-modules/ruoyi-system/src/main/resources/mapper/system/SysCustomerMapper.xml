@@ -32,4 +32,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
 
+    <select id="selectCustomerInfo" parameterType="Integer" resultMap="SysCustomerResult">
+        select id, name, phone, status, create_time
+        from sys_customer where id=#{customerId}
+    </select>
+
+    <insert id="insertCustomer" parameterType="SysCustomer">
+        insert into sys_customer (name,phone,status,create_time)
+                         values( #{name},#{phone},#{status},sysdate() )
+    </insert>
 </mapper>

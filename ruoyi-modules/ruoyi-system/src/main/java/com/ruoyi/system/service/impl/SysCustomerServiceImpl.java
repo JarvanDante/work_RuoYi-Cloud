@@ -43,4 +43,27 @@ public class SysCustomerServiceImpl implements ISysCustomerService
         }).toList();
     }
 
+    @Override
+    public SysCustomerVO selectCustomerInfo(Integer customerId) {
+        SysCustomer sysCustomer = sysCustomerMapper.selectCustomerInfo(customerId);
+        SysCustomerVO sysCustomerVO = new SysCustomerVO();
+
+        if (sysCustomer == null) {
+            return null;
+        }
+        sysCustomerVO.setId(sysCustomer.getId());
+        sysCustomerVO.setName(sysCustomer.getName());
+        sysCustomerVO.setPhone(sysCustomer.getPhone());
+        sysCustomerVO.setStatus(sysCustomer.getStatus());
+        sysCustomerVO.setCreateTime(sysCustomer.getCreateTime());
+
+
+        return sysCustomerVO;
+    }
+
+    @Override
+    public int insertCustomer(SysCustomer sysCustomer){
+        return sysCustomerMapper.insertCustomer(sysCustomer);
+    }
+
 }
