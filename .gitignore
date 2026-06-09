@@ -36,6 +36,12 @@ dist/
 nbdist/
 .nb-gradle/
 
+### docker ###
+docker/mysql/data
+docker/mysql/db
+docker/nacos/logs
+
+docker/redis/data
 ######################################################################
 # Others
 *.log
