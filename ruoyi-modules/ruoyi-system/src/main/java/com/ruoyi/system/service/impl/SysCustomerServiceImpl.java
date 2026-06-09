@@ -65,9 +65,14 @@ public class SysCustomerServiceImpl implements ISysCustomerService
     public int insertCustomer(SysCustomer sysCustomer){
         return sysCustomerMapper.insertCustomer(sysCustomer);
     }
+
     @Override
     public int updateCustomer(SysCustomer sysCustomer){
         return sysCustomerMapper.updateCustomer(sysCustomer);
     }
 
+    @Override
+    public int deleteCustomer(Integer[] customerIds){
+        return sysCustomerMapper.deleteCustomerByIds(customerIds);
+    }
 }

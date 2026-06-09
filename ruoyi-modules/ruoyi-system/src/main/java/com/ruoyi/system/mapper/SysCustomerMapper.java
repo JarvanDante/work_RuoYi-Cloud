@@ -27,4 +27,6 @@ public interface SysCustomerMapper
 
     public int updateCustomer(SysCustomer sysCustomer);
 
+    public int deleteCustomerByIds(Integer[] customerIds);
+
 }

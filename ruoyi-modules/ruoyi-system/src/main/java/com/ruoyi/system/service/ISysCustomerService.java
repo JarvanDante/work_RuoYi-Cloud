@@ -29,5 +29,7 @@ public interface ISysCustomerService
 
     public int updateCustomer(SysCustomer sysCustomer);
 
+    public int deleteCustomer(Integer[] customerIds);
+
 
 }

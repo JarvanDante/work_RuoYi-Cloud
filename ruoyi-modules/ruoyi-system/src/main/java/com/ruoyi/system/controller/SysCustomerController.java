@@ -77,81 +77,12 @@ public class SysCustomerController extends BaseController
         return toAjax(customerService.updateCustomer(customer));
     }
 
-//
-//    /**
-//     * 修改通知公告
-//     */
-//    @RequiresPermissions("system:notice:edit")
-//    @Log(title = "通知公告", businessType = BusinessType.UPDATE)
-//    @PutMapping
-//    public AjaxResult edit(@Validated @RequestBody SysNotice notice)
-//    {
-//        notice.setUpdateBy(SecurityUtils.getUsername());
-//        return toAjax(noticeService.updateNotice(notice));
-//    }
-//
-//    /**
-//     * 首页顶部公告列表（返回全部正常公告，带当前用户已读标记，最多5条）
-//     */
-//    @GetMapping("/listTop")
-//    @ResponseBody
-//    public AjaxResult listTop()
-//    {
-//        Long userId = SecurityUtils.getUserId();
-//        List<SysNotice> list = noticeReadService.selectNoticeListWithReadStatus(userId, 5);
-//        long unreadCount = list.stream().filter(n -> !n.getIsRead()).count();
-//        AjaxResult result = AjaxResult.success(list);
-//        result.put("unreadCount", unreadCount);
-//        return result;
-//    }
-//
-//    /**
-//     * 标记公告已读
-//     */
-//    @PostMapping("/markRead")
-//    @ResponseBody
-//    public AjaxResult markRead(Long noticeId)
-//    {
-//        Long userId = SecurityUtils.getUserId();
-//        noticeReadService.markRead(noticeId, userId);
-//        return success();
-//    }
-//
-//    /**
-//     * 批量标记已读
-//     */
-//    @PostMapping("/markReadAll")
-//    @ResponseBody
-//    public AjaxResult markReadAll(String ids)
-//    {
-//        Long userId = SecurityUtils.getUserId();
-//        Long[] noticeIds = Convert.toLongArray(ids);
-//        noticeReadService.markReadBatch(userId, noticeIds);
-//        return success();
-//    }
-//
-//    /**
-//     * 已读用户列表数据
-//     */
-//    @RequiresPermissions("system:notice:list")
-//    @GetMapping("/readUsers/list")
-//    @ResponseBody
-//    public TableDataInfo readUsersList(Long noticeId, String searchValue)
-//    {
-//        startPage();
-//        List<?> list = noticeReadService.selectReadUsersByNoticeId(noticeId, searchValue);
-//        return getDataTable(list);
-//    }
-//
-//    /**
-//     * 删除通知公告
-//     */
-//    @RequiresPermissions("system:notice:remove")
-//    @Log(title = "通知公告", businessType = BusinessType.DELETE)
-//    @DeleteMapping("/{noticeIds}")
-//    public AjaxResult remove(@PathVariable Long[] noticeIds)
-//    {
-//        noticeReadService.deleteByNoticeIds(noticeIds);
-//        return toAjax(noticeService.deleteNoticeByIds(noticeIds));
-//    }
+    @RequiresPermissions("system:customer:remove")
+    @Log(title = "客户", businessType = BusinessType.DELETE)
+    @DeleteMapping("/{customerIds}")
+    public AjaxResult delete(@PathVariable Integer[] customerIds)
+    {
+        return toAjax(customerService.deleteCustomer(customerIds));
+    }
+    
 }
