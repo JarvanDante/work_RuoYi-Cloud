@@ -66,17 +66,17 @@ public class SysCustomerController extends BaseController
         return toAjax(customerService.insertCustomer(customer));
     }
 
-//    /**
-//     * 新增通知公告
-//     */
-//    @RequiresPermissions("system:notice:add")
-//    @Log(title = "通知公告", businessType = BusinessType.INSERT)
-//    @PostMapping
-//    public AjaxResult add(@Validated @RequestBody SysNotice notice)
-//    {
-//        notice.setCreateBy(SecurityUtils.getUsername());
-//        return toAjax(noticeService.insertNotice(notice));
-//    }
+    @RequiresPermissions("system:customer:edit")
+    @Log(title = "客户", businessType = BusinessType.UPDATE)
+    @PutMapping
+    public AjaxResult edit(@Validated @RequestBody SysCustomer customer)
+    {
+        if(customer.getId()==null){
+            return error("客户ID不能为空");
+        }
+        return toAjax(customerService.updateCustomer(customer));
+    }
+
 //
 //    /**
 //     * 修改通知公告

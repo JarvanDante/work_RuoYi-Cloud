@@ -41,4 +41,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         insert into sys_customer (name,phone,status,create_time)
                          values( #{name},#{phone},#{status},sysdate() )
     </insert>
+
+    <update id="updateCustomer" parameterType="SysCustomer">
+        update sys_customer
+        <set>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="name !=null and name !=''">
+                name = #{name},
+            </if>
+            <if test="phone !=null and phone !=''">
+                phone = #{phone},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
 </mapper>

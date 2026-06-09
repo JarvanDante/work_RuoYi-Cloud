@@ -25,4 +25,6 @@ public interface SysCustomerMapper
 
     public int insertCustomer(SysCustomer sysCustomer);
 
+    public int updateCustomer(SysCustomer sysCustomer);
+
 }

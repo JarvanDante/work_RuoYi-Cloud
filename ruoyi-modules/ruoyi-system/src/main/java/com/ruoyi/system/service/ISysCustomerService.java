@@ -27,5 +27,7 @@ public interface ISysCustomerService
 
     public int insertCustomer(SysCustomer sysCustomer);
 
+    public int updateCustomer(SysCustomer sysCustomer);
+
 
 }
