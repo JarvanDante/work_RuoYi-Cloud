@@ -1,7 +1,7 @@
-version : '3.8'
+version: "3.8"
 services:
   ruoyi-nacos:
-    container_name: ruoyi-nacos
+    container_name: ruoyi-nacos-k8s
     image: nacos/nacos-server:v3.0.2
     build:
       context: ./nacos
@@ -15,13 +15,14 @@ services:
       - ./nacos/conf/application.properties:/home/nacos/conf/application.properties
     ports:
       - "8848:8848"
+      - "18080:8080"
       - "9848:9848"
       - "9849:9849"
     depends_on:
       - ruoyi-mysql
   ruoyi-mysql:
-    container_name: ruoyi-mysql
-    image: mysql:5.7
+    container_name: ruoyi-mysql-k8s
+    image: mysql/mysql-server
     build:
       context: ./mysql
     ports:
@@ -30,19 +31,20 @@ services:
       - ./mysql/conf:/etc/mysql/conf.d
       - ./mysql/logs:/logs
       - ./mysql/data:/var/lib/mysql
-    command: [
-          'mysqld',
-          '--innodb-buffer-pool-size=80M',
-          '--character-set-server=utf8mb4',
-          '--collation-server=utf8mb4_unicode_ci',
-          '--default-time-zone=+8:00',
-          '--lower-case-table-names=1'
-        ]
+    command:
+      [
+        "mysqld",
+        "--innodb-buffer-pool-size=80M",
+        "--character-set-server=utf8mb4",
+        "--collation-server=utf8mb4_unicode_ci",
+        "--default-time-zone=+8:00",
+        "--lower-case-table-names=1",
+      ]
     environment:
-      MYSQL_DATABASE: 'ry-cloud'
+      MYSQL_DATABASE: "ry-cloud"
       MYSQL_ROOT_PASSWORD: password
   ruoyi-redis:
-    container_name: ruoyi-redis
+    container_name: ruoyi-redis-k8s
     image: redis
     build:
       context: ./redis
@@ -69,7 +71,7 @@ services:
     links:
       - ruoyi-gateway
   ruoyi-gateway:
-    container_name: ruoyi-gateway
+    container_name: ruoyi-gateway-k8s
     build:
       context: ./ruoyi/gateway
       dockerfile: dockerfile
@@ -80,7 +82,7 @@ services:
     links:
       - ruoyi-redis
   ruoyi-auth:
-    container_name: ruoyi-auth
+    container_name: ruoyi-auth-k8s
     build:
       context: ./ruoyi/auth
       dockerfile: dockerfile
@@ -91,7 +93,7 @@ services:
     links:
       - ruoyi-redis
   ruoyi-modules-system:
-    container_name: ruoyi-modules-system
+    container_name: ruoyi-modules-system-k8s
     build:
       context: ./ruoyi/modules/system
       dockerfile: dockerfile
@@ -104,7 +106,7 @@ services:
       - ruoyi-redis
       - ruoyi-mysql
   ruoyi-modules-gen:
-    container_name: ruoyi-modules-gen
+    container_name: ruoyi-modules-gen-k8s
     build:
       context: ./ruoyi/modules/gen
       dockerfile: dockerfile
@@ -115,7 +117,7 @@ services:
     links:
       - ruoyi-mysql
   ruoyi-modules-job:
-    container_name: ruoyi-modules-job
+    container_name: ruoyi-modules-job-k8s
     build:
       context: ./ruoyi/modules/job
       dockerfile: dockerfile
@@ -126,16 +128,16 @@ services:
     links:
       - ruoyi-mysql
   ruoyi-modules-file:
-    container_name: ruoyi-modules-file
+    container_name: ruoyi-modules-file-k8s
     build:
       context: ./ruoyi/modules/file
       dockerfile: dockerfile
     ports:
       - "9300:9300"
     volumes:
-    - ./ruoyi/uploadPath:/home/ruoyi/uploadPath
+      - ./ruoyi/uploadPath:/home/ruoyi/uploadPath
   ruoyi-visual-monitor:
-    container_name: ruoyi-visual-monitor
+    container_name: ruoyi-visual-monitor-k8s
     build:
       context: ./ruoyi/visual/monitor
       dockerfile: dockerfile
