@@ -1,7 +1,6 @@
 package com.ruoyi.system.mapper;
 
 import com.ruoyi.system.domain.SysCustomer;
-import com.ruoyi.system.domain.SysNotice;
 
 import java.util.List;
 

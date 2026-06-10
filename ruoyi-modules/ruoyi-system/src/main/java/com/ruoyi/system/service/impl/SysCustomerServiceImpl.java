@@ -1,12 +1,9 @@
 package com.ruoyi.system.service.impl;
 
 import com.ruoyi.system.domain.SysCustomer;
-import com.ruoyi.system.domain.SysNotice;
 import com.ruoyi.system.domain.vo.SysCustomerVO;
 import com.ruoyi.system.mapper.SysCustomerMapper;
-import com.ruoyi.system.mapper.SysNoticeMapper;
 import com.ruoyi.system.service.ISysCustomerService;
-import com.ruoyi.system.service.ISysNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,41 +21,27 @@ public class SysCustomerServiceImpl implements ISysCustomerService
     private SysCustomerMapper sysCustomerMapper;
 
 
-    /**
-     * 查询客户列表
-     *
-     * @param sysCustomer 客户信息
-     * @return 客户集合
-     */
     @Override
     public List<SysCustomerVO> selectCustomerList(SysCustomer sysCustomer) {
-        List<SysCustomer> list = sysCustomerMapper.selectCustomerList(sysCustomer);
-        return list.stream().map(item->{
-            SysCustomerVO vo =new SysCustomerVO();
-            vo.setId(item.getId());
-            vo.setName(item.getName());
-            vo.setPhone(item.getPhone());
-            vo.setStatus(item.getStatus());
-            return vo;
-        }).toList();
+        return sysCustomerMapper.selectCustomerList(sysCustomer).stream()
+                .map(this::toVO)
+                .toList();
     }
 
     @Override
     public SysCustomerVO selectCustomerInfo(Integer customerId) {
         SysCustomer sysCustomer = sysCustomerMapper.selectCustomerInfo(customerId);
-        SysCustomerVO sysCustomerVO = new SysCustomerVO();
+        return sysCustomer == null ? null : toVO(sysCustomer);
+    }
 
-        if (sysCustomer == null) {
-            return null;
-        }
-        sysCustomerVO.setId(sysCustomer.getId());
-        sysCustomerVO.setName(sysCustomer.getName());
-        sysCustomerVO.setPhone(sysCustomer.getPhone());
-        sysCustomerVO.setStatus(sysCustomer.getStatus());
-        sysCustomerVO.setCreateTime(sysCustomer.getCreateTime());
-
-
-        return sysCustomerVO;
+    private SysCustomerVO toVO(SysCustomer customer) {
+        SysCustomerVO vo = new SysCustomerVO();
+        vo.setId(customer.getId());
+        vo.setName(customer.getName());
+        vo.setPhone(customer.getPhone());
+        vo.setStatus(customer.getStatus());
+        vo.setCreateTime(customer.getCreateTime());
+        return vo;
     }
 
     @Override

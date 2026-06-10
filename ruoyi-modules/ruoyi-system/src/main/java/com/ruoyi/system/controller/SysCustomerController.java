@@ -1,20 +1,14 @@
 package com.ruoyi.system.controller;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ruoyi.common.core.text.Convert;
 import com.ruoyi.common.core.web.controller.BaseController;
 import com.ruoyi.common.core.web.domain.AjaxResult;
 import com.ruoyi.common.core.web.page.TableDataInfo;
 import com.ruoyi.common.log.annotation.Log;
 import com.ruoyi.common.log.enums.BusinessType;
 import com.ruoyi.common.security.annotation.RequiresPermissions;
-import com.ruoyi.common.security.utils.SecurityUtils;
 import com.ruoyi.system.domain.SysCustomer;
-import com.ruoyi.system.domain.SysNotice;
 import com.ruoyi.system.domain.vo.SysCustomerVO;
 import com.ruoyi.system.service.ISysCustomerService;
-import com.ruoyi.system.service.ISysNoticeReadService;
-import com.ruoyi.system.service.ISysNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +28,7 @@ public class SysCustomerController extends BaseController
     private ISysCustomerService customerService;
 
     /**
-     * 获取通知公告列表
+     * 获取客户列表
      */
     @RequiresPermissions("system:customer:list")
     @GetMapping("/list")

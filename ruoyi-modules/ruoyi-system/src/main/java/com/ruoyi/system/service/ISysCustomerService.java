@@ -1,7 +1,6 @@
 package com.ruoyi.system.service;
 
 import com.ruoyi.system.domain.SysCustomer;
-import com.ruoyi.system.domain.SysNotice;
 import com.ruoyi.system.domain.vo.SysCustomerVO;
 
 import java.util.List;
