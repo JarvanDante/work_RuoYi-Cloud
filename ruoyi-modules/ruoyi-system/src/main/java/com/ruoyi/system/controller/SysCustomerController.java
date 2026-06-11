@@ -1,5 +1,6 @@
 package com.ruoyi.system.controller;
 
+import com.ruoyi.common.core.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.web.controller.BaseController;
 import com.ruoyi.common.core.web.domain.AjaxResult;
 import com.ruoyi.common.core.web.page.TableDataInfo;
@@ -9,6 +10,7 @@ import com.ruoyi.common.security.annotation.RequiresPermissions;
 import com.ruoyi.system.domain.SysCustomer;
 import com.ruoyi.system.domain.vo.SysCustomerVO;
 import com.ruoyi.system.service.ISysCustomerService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +39,19 @@ public class SysCustomerController extends BaseController
         startPage();
         List<SysCustomerVO> list = customerService.selectCustomerList(sysCustomer);
         return getDataTable(list);
+    }
+
+    /**
+     * 导出客户列表
+     */
+    @RequiresPermissions("system:customer:export")
+    @Log(title = "客户", businessType = BusinessType.EXPORT)
+    @PostMapping("/export")
+    public void export(HttpServletResponse response, SysCustomer sysCustomer)
+    {
+        List<SysCustomerVO> list = customerService.selectCustomerList(sysCustomer);
+        ExcelUtil<SysCustomerVO> util = new ExcelUtil<>(SysCustomerVO.class);
+        util.exportExcel(response, list, "客户数据");
     }
 
     /**
